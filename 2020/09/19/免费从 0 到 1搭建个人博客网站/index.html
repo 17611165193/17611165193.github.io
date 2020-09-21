@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="#使用 Hexo 框架来搭建个人网站这两天我重新整理了一下自己的 Blog ，因为我之前用的 Octopress 框架，有些年头了，一些主题和插件并不是很多。后来对比了几个框架，发现 Hexo 不错，和 Octopress 差不多，也是可以用 Markdown 写文章，然后生成静态网站，Hexo 主题丰富一些。Hexo 是基于 nodejs 的，搭建起来很简单。那么接下来就说说如何从 0 开始使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="免费从 0 到 1搭建个人博客网站">
+<meta property="og:url" content="http://yoursite.com/2020/09/19/%E5%85%8D%E8%B4%B9%E4%BB%8E%200%20%E5%88%B0%201%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/index.html">
+<meta property="og:site_name" content="Bruce Liu">
+<meta property="og:description" content="#使用 Hexo 框架来搭建个人网站这两天我重新整理了一下自己的 Blog ，因为我之前用的 Octopress 框架，有些年头了，一些主题和插件并不是很多。后来对比了几个框架，发现 Hexo 不错，和 Octopress 差不多，也是可以用 Markdown 写文章，然后生成静态网站，Hexo 主题丰富一些。Hexo 是基于 nodejs 的，搭建起来很简单。那么接下来就说说如何从 0 开始使用">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-09-19T01:24:45.089Z">
+<meta property="article:modified_time" content="2020-09-21T00:57:10.310Z">
+<meta property="article:author" content="Bruce Liu">
+<meta property="article:tag" content="博客搭建">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/09/19/%E5%85%8D%E8%B4%B9%E4%BB%8E%200%20%E5%88%B0%201%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>免费从 0 到 1搭建个人博客网站 | Bruce Liu</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bruce Liu</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">风雨中抱紧自由</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/%E5%85%8D%E8%B4%B9%E4%BB%8E%200%20%E5%88%B0%201%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Bruce Liu">
+      <meta itemprop="description" content="Bruce Liu的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce Liu">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          免费从 0 到 1搭建个人博客网站
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-19 09:24:45" itemprop="dateCreated datePublished" datetime="2020-09-19T09:24:45+08:00">2020-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-21 08:57:10" itemprop="dateModified" datetime="2020-09-21T08:57:10+08:00">2020-09-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">个人博客网站</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>#使用 Hexo 框架来搭建个人网站<br>这两天我重新整理了一下自己的 Blog ，因为我之前用的 Octopress 框架，有些年头了，一些主题和插件并不是很多。<br>后来对比了几个框架，发现 Hexo 不错，和 Octopress 差不多，也是可以用 Markdown 写文章，然后生成静态网站，Hexo 主题丰富一些。<br>Hexo 是基于 nodejs 的，搭建起来很简单。那么接下来就说说如何从 0 开始使用 Hexo 搭建个人博客吧。</p>
+<p>#开始搭建<br>因为 hexo 是基于 node 框架的，所以呢，我们首先需要下载安装node，下载地址：<a target="_blank" rel="noopener" href="https://nodejs.cn/">https://nodejs.cn/</a><br>安装完之后，我们打开命令窗口，输入 node -v ，如果返回下图所示，那么就说明你安装 node 成功了。</p>
+<p>#node 版本</p>
+<p>安装成功后，我们在命令行窗口运行如下命令来安装 hexo：<br>npm install hexo-cli -g<br>初始化博客目录：<br>hexo init xxx.github.io (这里的xxx换成你自己的英文名)<br>初始化完成后，我们就进入我们的目录：<br>cd xxx.github.io<br>安装<br>npm install<br>clean一下，然后生成静态页面<br>hexo clean<br>hexo g<br>g 就是generate ,生成的意思<br>把你的网站运行起来<br>hexo s<br>s 就是server ，在服务上运行的意思<br>打开你的浏览器，输入 localhost:4000 。自此，你的个人网站就这么速度的搭建起来了！</p>
+<p>#优化 hexo 博客主题<br>进入你的网站目录，打开 _config 文件，这个文件是用来配置你的网站信息的。<br>这里列出我的简单配置，具体可以看这个Hexo配置文档：<a target="_blank" rel="noopener" href="https://hexo.io/docs/configuration.html">https://hexo.io/docs/configuration.html</a><br>title: java，python，教程<br>subtitle: liuwei<br>description: xx的个人博客，主要涉及到编程（Java，Python，Linux等），个人提升学习，视频教程<br>keywords: java，python，教程<br>author: wistbean<br>language: zh<br>选一个Hexo主题<br>刚搭建完的网站，是不是觉得有点丑，不符合你的漂亮的脸庞？反正我是这么觉得的，那么就选一个主题来装饰一下吧，在这里可以选择你要的主题，知乎答主们推荐的hexo主题大全：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24422335">https://www.zhihu.com/question/24422335</a></p>
+<p>#下载Hexo主题<br>慢慢挑，选择好了你的主题之后，就可以下载主题资源了，比如我这里选择一个 NEXT 主题来演示一下，在你的目录中输入以下命令：<br>git clone <a target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</a> themes/next<br>这里主要就是将主题下载到我们的themes目录下。</p>
+<p>#配置主题<br>主题下载完之后，在你根目录下的 _config.yml 文件中，修改 theme 为你的主题名字：<br>theme: next<br>重新生成和运行<br>hexo g<br>hexo s<br>访问一下看看，是不是比之前好看多了？</p>
+<p>hexo next主题</p>
+<p>hexo博客的第一篇文章，打上标签和分类<br>你已经把你的网站打扮的漂亮大方简洁惹人爱了，那么接下来就要好好去写内容了，内容才是重要的。</p>
+<p>#两种方式来新建你的博文<br>命令形式<br>在你的 blog 目录下使用如下命令：<br>hexo new article （这里的article写上你的文章的名称）<br>输入这样的命令之后你的 source/_posts 下就会生成一个 article.md 文件，在这个文件下就可以写上你的博客内容了。<br>用 Markdown 的语法去写。<br>直接新建方式<br>直接点的方式就是直接在source/_posts新建一个 Markdown 文件，其实和命令形式是一个道理，只不过命令形式用了命令来创建。推荐使用命令的方式，毕竟 Geek 一点。</p>
+<p>给你的文章打上标签<br>在你的博客中打标签能让你的文章方便检索。<br>hexo打开标签功能：<br>hexo new page tags<br>这时候你的 source/ 下生成 tags/index.md 文件，我们将其打开，然后把它改成：<br>type: “tags”<br>comments: false<br>这时候你要为你的文章打上标签就可以在文章的头部写上：<br>tags:<br>    - Tag1<br>    - Tag2<br>    - Tag3<br>比如我现在的这篇文章打的标签就是这样的：<br>tags:<br>    - 个人网站<br>    - 教程<br>    - hexo<br>    - blog<br>    - Git<br>    - Nginx<br>#给你的文章添加分类<br>分类，归档，是你博客的特性之一。把文章分门别类，方便查看。<br>打开hexo分类功能：<br>hexo new page categories<br>同样的，你的 source 目录下生成 categories/index.md 文件，我们将其打开，把它改成：<br>type: “categories”<br>comments: false<br>这时候你就可以给你的文章归类存档了，使用方式就是在你的文章的头部加上：<br>categories:<br>         - 分类1<br>         - 分类2<br>比如我现在的这篇文章的分类就是这样的：<br>categories:<br>    - 个人网站<br>    - 教程<br>注意：标签和分类要确定你的配置文件 _config.yml 是否有打开了 tag_dir: tags 和 category_dir: categories。另外，Markdown 的语法是写作最优雅最简洁最简单的，如果之前没用过的建议去学一下Markdown 语法说明，一般一个钟左右就能掌握。因为它和 HTML 那样简单。<br>给你的文章添加评论<br>当别人看了你的文章，有问题想跟你探讨，没评论怎么行？评论也是你的 Blog 交互的重要方式之一。<br>现在很多 hexo 主题都内置了第三方评论的系统。比较常用的有：<br>多说 ：<a target="_blank" rel="noopener" href="http://duoshuo.com/">http://duoshuo.com/</a><br>畅言 ：<a target="_blank" rel="noopener" href="https://changyan.kuaizhan.com/">https://changyan.kuaizhan.com/</a><br>Valine：<a target="_blank" rel="noopener" href="https://github.com/xcss/Valine">https://github.com/xcss/Valine</a><br>Disqus：<a target="_blank" rel="noopener" href="https://disqus.com/">https://disqus.com/</a><br>友言: <a target="_blank" rel="noopener" href="http://www.uyan.cc/">http://www.uyan.cc/</a><br>gitment: <a target="_blank" rel="noopener" href="https://github.com/imsun/gitment">https://github.com/imsun/gitment</a><br>自己去看一下，喜欢哪个用哪个，自己的 Blog 就是要自由。<br>选好你的评论系统之后，进入平台注册后，平台会给你一个 APPID 和 appkey。拿到这些信息到你的主题下的配置文件下设置。<br>以 next 主题和畅言评论为例：进入你的themes/next,打开_config.yml，定位到 changyan ，把 enable 改为 true。<br>changyan:<br>  enable: true<br>  appid: 这里写上你的畅言在appid<br>  appkey: 这里写上你的畅言在appkey<br>设置好之后，重新clean生成一下就有评论啦：<br>hexo clean<br>hexo g<br>hexo s<br>打开你的预览连接看看你的文章下方，已经有评论功能啦。如下图就是我博客的评论功能：</p>
+<p>评论</p>
+<p>让全世界的人都认识你<br>已经搞定了个人blog，接下来当然是要部署到网上让人家访问了，如果不想花钱，可以使用GitHub Pages，使用它就可以部署自己的网站啦。<br>对于 GitHub 不知道怎么用的童鞋，可以看一下我的这个教程：GitHub完全使用指南：<a target="_blank" rel="noopener" href="https://vip.fxxkpython.com/?cat=6">https://vip.fxxkpython.com/?cat=6</a></p>
+<p>创建 Github pages 仓库<br>接着创建一个 xxx.github.io 的 public 仓库，这里的xxx写你的名字，比如我写的是 wistbean.github.io，那么到时我就可以通过 wistbean.github.io 来访问我的网站了。<br>创建完成之后，那么你就有自己的 Git 地址了。</p>
+<p>安装 hexo-deployer-git<br>在你的博客目录下输入如下命令，这样你在本地写的文章才能 push 到 GitHub 上面去。<br>npm install hexo-deployer-git –save</p>
+<p>配置你的Git<br>打开你的配置文件，然后输入你的 git 地址：<br>deploy:<br>    type: git<br>    repo: <a target="_blank" rel="noopener" href="https://github.com/xxx/xxxx.github.io.git">https://github.com/xxx/xxxx.github.io.git</a><br>推送你的网站到Github上<br>直接输入命令 ：hexo d<br>d 就是 deploy ， 部署上去的意思。<br>访问你的网站<br>这样push上去之后，你就可以直接在浏览器输入你的 xxx.github.io 就可以访问啦！<br>要有点个性，绑上你的域名<br>如果你不喜欢千篇一律的 xx.github.io 域名，可以自己绑定一个自己的域名。<br>购买域名<br>关于域名的购买我比较推荐去 dynadot 或者 godaddy，这是国外的域名商，可以使用支付宝购买，不需要备案，使用起来不错的。绑定<br>买完你的域名之后，接下来几个步骤轻松搞定：<br>添加 CNAME 文件<br>在你的博客的 sources 目录下新建一个 CNAME 文件，这个文件里面就写你的域名就可以了，比如：<a target="_blank" rel="noopener" href="http://www.xxxx.com./">www.xxxx.com。</a> 接着将文件push到你的 GitHub上，可以使用 hexo d 命令。<br>在你的域名商后台进行 DNS 解析添加两条记录：</p>
+<ol>
+<li><p>主机记录：@<br> 记录类型：A<br> 记录值：192.30.252.154 或者 192.30.252.153</p>
+</li>
+<li><p>主机记录：www<br>  记录类型：CNAME<br>  记录值：xxx.github.io  (这里就是你的github仓库名称)<br>GitHub 设置域名<br>在你的 GitHub 设置域名，在你的 GitHub 博客项目中点击 Settings，在 GitHub Pages 下的 Custom domain 写上你的域名，然后 save。</p>
+</li>
+</ol>
+<p>GitHub 设置域名</p>
+<p>至此，你已经搭建好了自己的博客，托管你的网站到 GitHub 了，也绑定了你自己的域名了，那么这时候你的网站就可以被全世界的人看到了。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag"># 博客搭建</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/19/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" rel="prev" title="类加载的生命周期">
+      <i class="fa fa-chevron-left"></i> 类加载的生命周期
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Bruce Liu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Bruce Liu</p>
+  <div class="site-description" itemprop="description">Bruce Liu的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bruce Liu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
